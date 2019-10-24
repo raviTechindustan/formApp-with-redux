@@ -60,6 +60,7 @@ class Login extends Component {
     return (
       <LoginForm
         loading={loading}
+        dddd
         user={user}
         onChange={this.onChange}
         onSubmit={this.onSubmit}
