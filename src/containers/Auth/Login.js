@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth';
 import LoginForm from './LoginForm';
 import { validateLogin } from './validations';
+import { toast } from "react-toastify";
+
 
 class Login extends Component {
   state = {
@@ -16,7 +18,7 @@ class Login extends Component {
 
   onChange = (e) => {
     const { name, value } = e.target;
-    const { user = {}, errors = {} } = this.state;    
+    const { user = {}, errors = {} } = this.state;
 
     this.setState({
       user: {
@@ -32,12 +34,19 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+
     const { user = {} } = this.state;
 
     if (this.isValid(user)) {
       this.props.login(user).then(res => {
-        this.props.history.push("/Dashboard");
+        this.props.history.push("/");
+        toast.success("Logged in successfully", {
+          position: toast.POSITION.TOP_CENTER
+        });
       }).catch(err => {
+        toast.error(err && err.response && err.response.data && err.response.data.message, {
+          position: toast.POSITION.TOP_CENTER
+        });
         this.props.history.push("/Login");
       })
     }
@@ -47,7 +56,7 @@ class Login extends Component {
     const { isValid, errors } = validateLogin(data);
     this.setState({
       errors
-    },()=>{
+    }, () => {
       console.log(this.state.errors);
     })
     return isValid
@@ -58,14 +67,15 @@ class Login extends Component {
     const { user = {}, errors = {} } = this.state;
 
     return (
-      <LoginForm
-        loading={loading}
-        dddd
-        user={user}
-        onChange={this.onChange}
-        onSubmit={this.onSubmit}
-        errors={errors}
-      />
+      <React.Fragment>
+        <LoginForm
+          loading={loading}
+          user={user}
+          onChange={this.onChange}
+          onSubmit={this.onSubmit}
+          errors={errors}
+        />
+      </React.Fragment>
     );
   }
 }

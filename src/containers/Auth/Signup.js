@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth';
 import SignupForm from './SignupForm';
 import {validateSignup} from './validations';
+import { ToastContainer, toast } from "react-toastify";
+//import 'react-toastify/dist/ReactToastify.css';
+
 class Signup extends Component {
   state = {
     user: {
@@ -37,8 +40,15 @@ class Signup extends Component {
 
     if (this.isValid(user)){
     this.props.signup(user).then(res => {
+
+      toast.success(res && res.message, {
+        position: toast.POSITION.TOP_CENTER
+      });
       this.props.history.push("/Login");
     }).catch(err => {
+      toast.error(err && err.response && err.response.data && err.response.data.message, {
+        position: toast.POSITION.TOP_CENTER
+      });
       console.log(err || "something went wrong")
     })
   }
@@ -58,12 +68,14 @@ isValid = (data) => {
   render() {
     const { user = {}, errors = {} } = this.state;
     return (
+      <React.Fragment>
       <SignupForm
         user={user}
         errors={errors}
         signup={this.signup}
         onChange={this.onChange}
       />
+      </React.Fragment>
     )
   }
 }

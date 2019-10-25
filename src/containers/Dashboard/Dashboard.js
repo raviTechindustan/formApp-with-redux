@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Button} from "react-bootstrap";
 
-export class Dashboard extends Component {
+ class Dashboard extends Component {
   state = {
     local :{}
   }
   
   componentDidMount = () => {
-    if (localStorage.getItem("andy-user") === null) {
-      this.props.history.push("/Login")
+    if (!localStorage.getItem("andy-user")) {
+      this.props.history.push("/login")
     }
     else {
       let item = JSON.parse(localStorage.getItem("andy-user"));
