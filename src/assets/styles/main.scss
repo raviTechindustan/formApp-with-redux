@@ -278,3 +278,14 @@ button {
 .signin {
     justify-content: center !important;
 }
+
+.mainproduct{
+  border: 1px solid red;
+  display: inline-block;
+  width:100%;
+  min-height:100px;
+  .image{
+    object-fit: cover; 
+    height: 300px;
+  }
+}

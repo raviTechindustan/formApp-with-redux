@@ -23,16 +23,17 @@ export default function( state = { ...initialState}, action) {
       return { ...state, loading: false, error: action.error }
 
     case 'SIGNUP_REQUEST':
+      console.log("Signup Rewqwqw runsnd");
       return { ...state, loading: true, error: '' }
     
     case 'SIGNUP_SUCCESS':
-      return { ...state, loading: false,  message: "Signup In SuccesFully" }
+      return { ...state, loading: false,  message: "Signup SuccesFully" }
 
     case 'SIGNUP_FAILED':
       return { ...state, loading: false, error: action.error }
 
     default:
-      return state
+      return { ...state }
   }
 }
 

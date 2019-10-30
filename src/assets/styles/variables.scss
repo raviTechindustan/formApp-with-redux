@@ -1,0 +1,15 @@
+$borderList: (
+  primary: 1px solid #444
+);
+
+@function border($style) {
+  @return map-get($borderList, $style);
+}
+
+$shadowList: (
+  primary: 0px 0px 10px 1px rgba(0, 0, 0, .3)
+);
+
+@function shadow($style) {
+  @return map-get($shadowList, $style);
+}

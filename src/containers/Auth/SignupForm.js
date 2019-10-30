@@ -6,16 +6,20 @@ const SignupForm = (props) => {
     user = {},
     onChange,
     signup,
-    errors
+    errors,
+    loading = false
   } = props;
+
+ 
+
   return (
     <Container fluid className="signup-page">
-      <div className="maincontainer">
+      {loading ? <div className="loading-fp">loading</div> : <div className="maincontainer">
         <div className="inerdiv">
           <Row style={{ margin: 0 }}>
             <Col md={4} className="inerdivtwo">
               <p className="Welcome">Welcome Back!</p>
-              <p className="para">To keep connection with us please login  with your personal info</p>
+              <p className="para">To keep connection with us please signup  with your personal info</p>
               <center>
                 <Link to="/Login">Sign In</Link>
               </center>
@@ -79,7 +83,7 @@ const SignupForm = (props) => {
                         <InputGroup.Text id="basic-addon1" className="icon-pretend"><i class="fas fa-unlock-alt"></i></InputGroup.Text>
                       </InputGroup.Prepend>
                       <Form.Control
-                        type="text"
+                        type="password"
                         className="forms"
                         name="password"
                         value={user.password}
@@ -92,7 +96,7 @@ const SignupForm = (props) => {
                         <InputGroup.Text id="basic-addon1" className="icon-pretend"><i class="fas fa-unlock-alt"></i></InputGroup.Text>
                       </InputGroup.Prepend>
                       <Form.Control
-                        type="text"
+                        type="password"
                         className="forms"
                         name="confirmpassword"
                         value={user.confirmpassword}
@@ -109,7 +113,8 @@ const SignupForm = (props) => {
             </Col>
           </Row>
         </div>
-      </div>
+      </div>}
+     
     </Container>
   );
 }

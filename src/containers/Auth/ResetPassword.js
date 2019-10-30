@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import ForgotPasswordForm from './ForgotPasswordForm';
+import ResetPasswordForm from './ResetPasswordForm';
 
 
 
-
-class ForgotPassword extends Component {
+class ResetPassword extends Component {
   state = {
     user: {
-      email: "",
-      otp:""
+      password: "",
+      confirmpassword: ""
     },
     errors: {}
   }
@@ -32,14 +31,13 @@ class ForgotPassword extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.history.push("/Reset-Password")
   }
 
 
   render() {
     return (
       <React.Fragment>
-        <ForgotPasswordForm
+        <ResetPasswordForm
           onChange={this.onChange}
           onSubmit={this.onSubmit}
           user={this.user}
@@ -50,4 +48,4 @@ class ForgotPassword extends Component {
 }
 
 
-export default ForgotPassword;
+export default ResetPassword;

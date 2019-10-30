@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Button} from "react-bootstrap";
+import Products from "./Products";
+import './index.scss';
 
  class Dashboard extends Component {
   state = {
-    local :{}
+    local: {},
+    values: {}
   }
   
   componentDidMount = () => {
@@ -14,6 +17,7 @@ import {Button} from "react-bootstrap";
     else {
       let item = JSON.parse(localStorage.getItem("andy-user"));
       console.log(item ,"this is storage")
+
       this.setState({ local: item }, () => { console.log(this.state.local);})
    
     }
@@ -30,6 +34,7 @@ import {Button} from "react-bootstrap";
       <div className="text-center">
         <p>welcome {this.state.local.firstName}</p>
         <Button variant="secondary" onClick={this.onClick}>LOGOUT</Button>
+        <Products />
       </div>
     )
   }

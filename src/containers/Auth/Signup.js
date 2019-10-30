@@ -67,6 +67,7 @@ isValid = (data) => {
 
   render() {
     const { user = {}, errors = {} } = this.state;
+    const { loading = false } = this.props;
     return (
       <React.Fragment>
       <SignupForm
@@ -74,14 +75,17 @@ isValid = (data) => {
         errors={errors}
         signup={this.signup}
         onChange={this.onChange}
+        loading={loading}
       />
       </React.Fragment>
     )
   }
 }
 const mapStateToProps = (state) => {
+  
   return {
-    auth: state.auth
+    auth: state.auth,
+    loading : state.loading
   }
 }
 

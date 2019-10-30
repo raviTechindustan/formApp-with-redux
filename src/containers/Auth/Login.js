@@ -41,11 +41,11 @@ class Login extends Component {
       this.props.login(user).then(res => {
         this.props.history.push("/");
         toast.success("Logged in successfully", {
-          position: toast.POSITION.TOP_CENTER
+          // position: toast.POSITION.TOP_CENTER
         });
       }).catch(err => {
         toast.error(err && err.response && err.response.data && err.response.data.message, {
-          position: toast.POSITION.TOP_CENTER
+          // position: toast.POSITION.TOP_CENTER
         });
         this.props.history.push("/Login");
       })
