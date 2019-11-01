@@ -5,6 +5,7 @@ const initialState = {
   product: {},
 }
 
+//console.log(initialState.product, "product");
 
 export default function (state = { ...initialState }, action) {
   switch (action.type) {
@@ -12,22 +13,38 @@ export default function (state = { ...initialState }, action) {
       return { ...state, loading: true, error: '' }
 
     case 'ALL_PRODUCT_SUCCESS':
-      console.log("=====")
-      return { ...state, loading: false, allProduct: action.products }
+      //console.log("=====")
+      return { ...state, loading: false, allProduct: action.products.values }
 
     case 'ALL_PRODUCT_FAILED':
       return { ...state, loading: false }
 
-    // case 'SIGNUP_REQUEST':
-    //   console.log("Signup Rewqwqw runsnd");
-    //   return { ...state, loading: true, error: '' }
+    case 'PRODUCT_REQUEST':
+      return { ...state, loading: true }
 
-    // case 'SIGNUP_SUCCESS':
-    //   return { ...state, loading: false, message: "Signup SuccesFully" }
+    case 'PRODUCT_SUCCESS':
+      return { ...state, loading: false, product: action.product }
 
-    // case 'SIGNUP_FAILED':
-    //   return { ...state, loading: false, error: action.error }
+    case 'PRODUCT_FAILED':
+      return { ...state, loading: false, error: action.error }
+    
+    case 'UPDATE_PRODUCT_REQUEST':
+      return { ...state, loading:true}
+    
+    case 'UPDATE_PRODUCT_SUCCESS':
+      return {...state ,loading:false, product:action.product}
 
+    case 'UPDATE_PRODUCT_FAILED':
+      return {...state , loading:false }
+
+    case 'DELETE_PRODUCT_REQUEST':
+      return { ...state, loading: true }
+
+    case 'DELETE_PRODUCT_SUCCESS':
+      return { ...state, loading: false }
+
+    case 'DELETE_PRODUCT_FAILED':
+      return { ...state, loading: false }
     default:
       return { ...state }
   }

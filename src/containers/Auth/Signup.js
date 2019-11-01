@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/auth';
 import SignupForm from './SignupForm';
 import {validateSignup} from './validations';
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 //import 'react-toastify/dist/ReactToastify.css';
 
 class Signup extends Component {

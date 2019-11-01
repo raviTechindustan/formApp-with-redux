@@ -16,7 +16,8 @@ export function saveObject(key: String, value: Object) {
 }
 
 export function getHeaders() {
-  let user = getObject("user");
+  let user = JSON.parse(getObject("andy-user"));
+  //console.log("USer are", user && user.token);
   if (user)
     return {
       Authorization: `Bearer ${(user && user.token) || null}`,
@@ -80,4 +81,17 @@ export function apiGet(endPoint, data, headers = {}, requestOptions) {
 
 export function apiPut(endPoint, data, headers = {}) {
   return apiReq(generateUrl(endPoint), data, "put", headers);
+}
+export function apiPatch(endPoint,data,headers = {}) {
+  return apiReq(generateUrl(endPoint), data, "patch", headers)
+}
+
+
+export const scrollIntoView = (label) => {
+  var elmnt = document.getElementById(label);
+  if (elmnt) {
+    setTimeout(() => {
+      elmnt.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
+    }, 250);
+  }
 }

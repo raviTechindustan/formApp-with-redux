@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Container, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+
 
 const ForgotPasswordForm = (props) => {
   const {
