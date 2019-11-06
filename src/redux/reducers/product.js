@@ -1,11 +1,11 @@
 
 const initialState = {
-  allProduct: {},
+  allProduct: [],
   loading: false,
   product: {},
 }
 
-//console.log(initialState.product, "product");
+// console.log(initialState.product, "product");
 
 export default function (state = { ...initialState }, action) {
   switch (action.type) {
@@ -14,6 +14,10 @@ export default function (state = { ...initialState }, action) {
 
     case 'ALL_PRODUCT_SUCCESS':
       //console.log("=====")
+      return { ...state, loading: false, allProduct: action.result.values  }
+
+    case 'ALL_PRODUCT_SAVE':
+      console.log("=====", action)
       return { ...state, loading: false, allProduct: action.products.values }
 
     case 'ALL_PRODUCT_FAILED':
@@ -30,7 +34,18 @@ export default function (state = { ...initialState }, action) {
     
     case 'UPDATE_PRODUCT_REQUEST':
       return { ...state, loading:true}
-    
+    case 'FIND_DATA' : {
+      let { allProduct }=state;
+      let result = [];
+       for(let i=0 ; i<allProduct.length-1 ; i++){
+         console.log(allProduct[i].id, action.id)
+          if(allProduct[i].id === action.id){
+            result.push(allProduct[i]);
+          }
+       }
+       console.log("Result are", result)
+      return { ...state, loading: false, allProduct: result }
+    }
     case 'UPDATE_PRODUCT_SUCCESS':
       return {...state ,loading:false, product:action.product}
 

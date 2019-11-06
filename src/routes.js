@@ -12,11 +12,10 @@ const Resetpassword = React.lazy(() => import('./containers/Auth/ResetPassword')
 const Dashboard = React.lazy(() => import('./containers/Dashboard/Dashboard.js'));
 
 
-
 class Routes extends Component {
   state = {}
 
-  goToTop = ()=>{
+  goToTop = () => {
     scrollIntoView("top")
   }
 
@@ -29,15 +28,15 @@ class Routes extends Component {
               <Route exact path="/" component={Dashboard} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
-            <Route path="/forgot-password" component={ForgotPassword} />
+              <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={Resetpassword} />
             </Switch>
           </Router>
         </Suspense>
         <ToastContainer />
         <div className="abc" onClick={this.goToTop} ></div>
-        </div>
-     
+      </div>
+
     );
   }
 }

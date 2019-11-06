@@ -15,3 +15,5 @@ export function saveProductById(id, data) {
 export function deleteProductById(id) {
   return apiDelete(`/products/${id}`);
 }
+
+

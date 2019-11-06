@@ -17,7 +17,7 @@ export function AllProduct() {
       console.log(success)
       dispatch({
         type: 'ALL_PRODUCT_SUCCESS',
-        products: success
+        result: success
       })
       return res(success);
     }).catch(error => {
@@ -26,6 +26,15 @@ export function AllProduct() {
       })
       return rej(error)
     }))
+  }
+}
+
+export function saveData(data) {
+  return (dispatch) => {
+    dispatch({
+      type: 'ALL_PRODUCT_SAVE',
+      products: { values : data } 
+    })
   }
 }
 
@@ -53,12 +62,21 @@ export function ProductsById(id) {
   }
 }
 
-export function saveProductId(id, data) {
-  console.log("data" ,id)
-
-  return(dispatch) => {
+export function findData(id){
+  return (dispatch)=>{
     dispatch({
-      type:'UPDATE_PRODUCT_REQUEST'
+      type:'FIND_DATA',
+      id : id
+    })
+  }
+}
+
+export function saveProductId(id, data) {
+  console.log("data", id)
+
+  return (dispatch) => {
+    dispatch({
+      type: 'UPDATE_PRODUCT_REQUEST'
     })
 
     return new Promise((res, rej) => saveProductById(id, data).then(success => {
@@ -69,7 +87,7 @@ export function saveProductId(id, data) {
       return res(success);
     }).catch(error => {
       dispatch({
-        type:'UPDATE_PRODUCT_FAILED'
+        type: 'UPDATE_PRODUCT_FAILED'
       })
       return rej(error)
     }))
