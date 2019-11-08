@@ -1,8 +1,8 @@
 import React, { Component, Suspense, lazy } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { isLoggedIn } from "./utils"
 import { scrollIntoView } from "./utils";
 
 const Login = lazy(() => import('./containers/Auth/Login'));
@@ -11,6 +11,13 @@ const ForgotPassword = React.lazy(() => import('./containers/Auth/ForgotPassword
 const Resetpassword = React.lazy(() => import('./containers/Auth/ResetPassword'));
 const Dashboard = React.lazy(() => import('./containers/Dashboard/Dashboard.js'));
 
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  return <Route {...rest} render={props => isLoggedIn() ? <Component {...props}/> : <Redirect to="/Login" /> }/>
+}
+
+const PublicRoute = ({ component: Component, ...rest }) => {
+  return <Route {...rest} render={ props => <Component {...props} /> } />
+}
 
 class Routes extends Component {
   state = {}
@@ -25,11 +32,12 @@ class Routes extends Component {
         <Suspense fallback={<div><center>loading...</center></div>}>
           <Router>
             <Switch>
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/forgot-password" component={ForgotPassword} />
-              <Route path="/reset-password" component={Resetpassword} />
+              <PrivateRoute exact path="/" component={Dashboard} />
+              <PublicRoute path="/Login" component={Login} />
+              <PublicRoute path="/signup" component={Signup} />
+              <PublicRoute path="/forgot-password" component={ForgotPassword} />
+              <PublicRoute path="/reset-password" component={Resetpassword} />
+              <Route component={NotFound} />
             </Switch>
           </Router>
         </Suspense>
@@ -42,3 +50,12 @@ class Routes extends Component {
 }
 
 export default Routes;
+
+
+const NotFound = () => {
+  return (
+    <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <h1>The route you are looking for is not found</h1>
+    </div>
+  )
+}

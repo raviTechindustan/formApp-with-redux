@@ -4,6 +4,7 @@ import {Button} from "react-bootstrap";
 import TopMenuBar from './TopMenuBar';
 import Products from "./Products";
 import './index.scss';
+import { removeObject } from "../../utils"
 
 
 
@@ -12,22 +13,10 @@ import './index.scss';
     local: {},
     values: {}
   }
-  
-  componentDidMount = () => {
-    if (!localStorage.getItem("andy-user")) {
-      this.props.history.push("/login")
-    }
-    else {
-      let item = JSON.parse(localStorage.getItem("andy-user"));
-     // console.log(item ,"this is storage")
 
-      this.setState({ local: item }, () => { /*console.log(this.state.local)*/;})
-   
-    }
-  }
-
-  onClick = () =>{
-    localStorage.clear();
+  onClick = () => {
+    removeObject("andy-user");
+    removeObject("access-token");
     this.props.history.push("/Login");
   }
 
@@ -38,7 +27,7 @@ import './index.scss';
     return (
       <div className="text-right" style={{ backgroundColor:"#0000000d"}}>
         <h3>welcome {this.state.local.firstName}</h3>
-        <Button variant="secondary" onClick={this.onClick} style={{}}>LOGOUT</Button>
+        <Button variant="secondary" onClick={() => this.onClick()} style={{}}>LOGOUT</Button>
         <TopMenuBar />
       
         <Products />

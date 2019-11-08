@@ -122,7 +122,7 @@ class Products extends React.Component {
 
     let fake_data = [];
     for (let i = 1; i <= 100; i++) {
-      let image = Faker.image.image();
+      let image = Faker.image.avatar()
       let name = Faker.internet.userName()
       fake_data.push({ asset: { url: image }, name: name });
     }

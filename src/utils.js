@@ -9,7 +9,11 @@ export function getObject(name) {
   return null;
 }
 
-export function saveObject(key: String, value: Object) {
+export function removeObject(key) {
+  localStorage.removeItem(key);
+}
+
+export function saveObject(key = "", value = "") {
   if (window && window.localStorage) {
     window.localStorage.setItem(key, value);
   }
@@ -24,6 +28,14 @@ export function getHeaders() {
     };
   return {}
 }
+
+export const isLoggedIn = () => {
+  let user = JSON.parse(getObject("andy-user"));
+  if (user && user.token) {
+    return true;
+  }
+  return false;
+};
 
 export function generateUrl(path) {
   if (path.includes("http")) {
@@ -82,7 +94,7 @@ export function apiGet(endPoint, data, headers = {}, requestOptions) {
 export function apiPut(endPoint, data, headers = {}) {
   return apiReq(generateUrl(endPoint), data, "put", headers);
 }
-export function apiPatch(endPoint,data,headers = {}) {
+export function apiPatch(endPoint, data, headers = {}) {
   return apiReq(generateUrl(endPoint), data, "patch", headers)
 }
 
